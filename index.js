@@ -1,8 +1,11 @@
 var week = /^P([0-9]+W)$/;
-var dateTime = /^P(([0-9]+Y)?([0-9]+M)?([0-9]+D)?)?(T([0-9]+H)?([0-9]+M)?([0-9]+S)?)?$/;
+var dateTime = /^P(([0-9]+Y)?([0-9]+M)?([0-9]+D)?)?(T([0-9]+H)?([0-9]+M)?([0-9\.]+S)?)?$/;
 
 function extractInt (str) {
-  return parseInt(str.substring(0, str.length - 1), 10);
+  if (str.indexOf('.') == -1) {
+    return parseInt(str.substring(0, str.length - 1), 10);
+  }
+  return parseFloat(str.substring(0, str.length - 1), 10);
 };
 
 function parsePart (mode, str) {
